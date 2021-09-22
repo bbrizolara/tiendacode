@@ -1,3 +1,11 @@
 <h1>Product <%= @product.id %> </h1>
 
 <h3>  Name: <%= @product.name %> </h3>
+<h3>  Description: <%= @product.description %> </h3>
+<h3>  Price: <%= @product.price %> </h3>
+<h3>  Image:  </h3>
+<% if @product.image.attached? %>
+<p>
+    <%= image_tag @product.image %>
+</p>
+<% end %>
