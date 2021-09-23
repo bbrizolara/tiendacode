@@ -1,0 +1,43 @@
+<%= form_with(model: product) do |form| %>
+
+    <% if product.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(product.errors.count, "error") %> found:</h2>
+
+      <ul>
+        <% product.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+       
+    </div>
+    <br>
+    <div>
+        <%= form.label :description %>
+        <br>
+        <%= form.text_area :description %>
+       
+    </div>
+    <br>
+    <div>
+        <%= form.label :price %>
+        <%= form.number_field :price %>
+        
+    </div>
+    <br>
+    <div>
+        <%= form.label :image %>
+        <%= form.file_field :image, direct_upload: true %>
+       
+    </div>
+    <br>
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>
