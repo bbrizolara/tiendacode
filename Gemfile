@@ -29,6 +29,14 @@ gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
+  # install rspec gem
+  gem 'rspec-rails', '~> 4.0'
+  # install factory bot gem
+  gem 'factory_bot_rails'
+  # required to use render_template on specs
+  gem 'rails-controller-testing'
+  # install faker gem
+  gem 'faker'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 end
