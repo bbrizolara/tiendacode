@@ -1,5 +1,7 @@
-Rails.application.routes.draw do
-  root 'products#index'
+# frozen_string_literal: true
 
-  resources :products, only: [:index, :show]
+Rails.application.routes.draw do
+  root "products#index"
+
+  resources :products
 end

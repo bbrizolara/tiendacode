@@ -190,6 +190,11 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (3.0.0)
+    shoulda-matchers (5.0.0)
+      activesupport (>= 5.2.0)
+    simple_form (5.1.0)
+      actionpack (>= 5.2)
+      activemodel (>= 5.2)
     spring (3.0.0)
     sprockets (4.0.2)
       concurrent-ruby (~> 1.0)
@@ -245,6 +250,8 @@ DEPENDENCIES
   rspec-rails (~> 4.0)
   sass-rails (>= 6)
   selenium-webdriver
+  shoulda-matchers
+  simple_form
   spring
   sqlite3 (~> 1.4)
   turbolinks (~> 5)
