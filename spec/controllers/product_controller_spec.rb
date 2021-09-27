@@ -8,8 +8,8 @@ RSpec.describe ProductsController, type: :controller do
     before { get :index }
 
     it { expect(response).to have_http_status(:success) }
-    it { expect(assigns(:products)).to_not be_empty }
-    it { should render_template("index") }
+    it { expect(products).to_not be_empty }
+    it { is_expected.to render_template("index") }
   end
 
   describe "GET #show" do
@@ -17,18 +17,15 @@ RSpec.describe ProductsController, type: :controller do
     subject { get :show, params: { id: product.id } }
 
     it { is_expected.to have_http_status(:success) }
-    it { should render_template("show") }
-    it "should be a Product" do
-      get :show, params: { id: product.id }
-      expect(assigns(:product)).to be_a(Product)
-    end
+    it { is_expected.to render_template("show") }
+    it { expect(product).to be_a(Product) }
   end
 
   describe "GET #new" do
     before { get :new }
 
     it { expect(response).to have_http_status(:success) }
-    it { should render_template("new") }
+    it { is_expected.to render_template("new") }
     it { expect(assigns(:product)).to be_a(Product) }
     it { expect(assigns(:product)).to be_a_new(Product) }
   end
@@ -47,7 +44,7 @@ RSpec.describe ProductsController, type: :controller do
       is_expected.to receive(:new).with(params).and_return(product)
 
       post :create, params: { product: params }
-      expect(response).to redirect_to(action: :show, id: assigns(:product).id)
+      expect(response).to redirect_to(action: :show, id: product.id)
     end
 
     it "should not create a Product with given params" do
@@ -63,11 +60,8 @@ RSpec.describe ProductsController, type: :controller do
     subject { get :edit, params: { id: product.id } }
 
     it { expect(response).to have_http_status(:success) }
-    it { should render_template("edit") }
-    it "should be a Product" do
-      get :show, params: { id: product.id }
-      expect(assigns(:product)).to be_a(Product)
-    end
+    it { is_expected.to render_template("edit") }
+    it { expect(product).to be_a(Product) }    
   end
 
   describe "PUT #update" do
@@ -85,7 +79,7 @@ RSpec.describe ProductsController, type: :controller do
       put :update, params: { id: product.id, product: params }
       product.reload
       expect(product.name).to eq(params[:name])
-      expect(response).to redirect_to(action: :show, id: assigns(:product).id)
+      expect(response).to redirect_to(action: :show, id: product.id)
     end
 
     it "should not update a Product" do
