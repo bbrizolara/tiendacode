@@ -8,7 +8,6 @@ RSpec.describe ProductsController, type: :controller do
     before { get :index }
 
     it { expect(response).to have_http_status(:success) }
-    it { expect(products).to_not be_empty }
     it { is_expected.to render_template("index") }
   end
 
@@ -18,7 +17,6 @@ RSpec.describe ProductsController, type: :controller do
 
     it { is_expected.to have_http_status(:success) }
     it { is_expected.to render_template("show") }
-    it { expect(product).to be_a(Product) }
   end
 
   describe "GET #new" do
@@ -26,33 +24,25 @@ RSpec.describe ProductsController, type: :controller do
 
     it { expect(response).to have_http_status(:success) }
     it { is_expected.to render_template("new") }
-    it { expect(assigns(:product)).to be_a(Product) }
     it { expect(assigns(:product)).to be_a_new(Product) }
   end
 
   describe "POST #create" do
-    subject { Product }
+    subject { post :create, params: { product: params } }
 
+    let(:new_price) { { price: attributes_prod[:price].to_s } }
+    let(:attributes_prod) { FactoryBot.attributes_for(:random_product) }
     let(:params) do
-      ActionController::Parameters.new(FactoryBot.attributes_for(:random_product))
-      .permit(:name, :description, :price, :image)
+      ActionController::Parameters.new(attributes_prod.merge(new_price))
+                                  .permit(:name, :description, :price)
     end
     let(:product) { FactoryBot.build(:random_product, params.to_h) }
 
-    it "should create a Product with given params" do
-      params[:price] = params[:price].to_s
-      is_expected.to receive(:new).with(params).and_return(product)
-
-      post :create, params: { product: params }
-      expect(response).to redirect_to(action: :show, id: product.id)
+    it 'should create a product with give attributes' do
+      expect(Product).to receive(:new).with(params).and_return(product)
+      subject
     end
 
-    it "should not create a Product with given params" do
-      params[:name] = nil
-      post :create, params: { product: params }
-      expect(response).to render_template("new")
-      expect(response).to_not have_http_status(:success)
-    end
   end
 
   describe "GET #edit" do
@@ -61,33 +51,25 @@ RSpec.describe ProductsController, type: :controller do
 
     it { expect(response).to have_http_status(:success) }
     it { is_expected.to render_template("edit") }
-    it { expect(product).to be_a(Product) }    
   end
 
   describe "PUT #update" do
-    subject { Product }
+    subject { put :update, params: { id: product.id, product: params } }
 
+    let(:new_price) { { price: attributes_prod[:price].to_s } }
+    let(:attributes_prod) { FactoryBot.attributes_for(:random_product) }
     let(:params) do
-      ActionController::Parameters.new(FactoryBot.attributes_for(:random_product))
-      .permit(:name, :description, :price, :image)
+      ActionController::Parameters.new(attributes_prod.merge(new_price))
+                                  .permit(:name, :description, :price)
     end
     let!(:product) { FactoryBot.create(:random_product, params.to_h) }
-
     it "should update a Product with given params" do
-      params[:price] = params[:price].to_s
+      
       params[:name] = "Updated name"
-      put :update, params: { id: product.id, product: params }
+      subject
       product.reload
       expect(product.name).to eq(params[:name])
       expect(response).to redirect_to(action: :show, id: product.id)
-    end
-
-    it "should not update a Product" do
-      params[:price] = params[:price].to_s
-      params[:name] = nil
-      put :update, params: { id: product.id, product: params }
-      expect(response).to render_template("edit")
-      expect(response).to_not have_http_status(:success)
     end
   end
 

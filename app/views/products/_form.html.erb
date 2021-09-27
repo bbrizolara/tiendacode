@@ -7,9 +7,9 @@
     <%= f.input :description %>
     <%= f.input :price %>
     <%= f.input :image %>
-    <% if @product.image.attached? %>
+    <% if product.image.attached? %>
       <p>
-        <%= image_tag @product.image %>
+        <%= image_tag product.image %>
       </p>
     <% end %>
     
