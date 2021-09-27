@@ -3,7 +3,7 @@
 require "open-uri"
 
 FactoryBot.define do
-  factory :random_product, class: Product do
+  factory :product, class: Product do
     name { Faker::Name.name }
     description { Faker::Commerce.department }
     price { Faker::Number.decimal(l_digits: 2) }

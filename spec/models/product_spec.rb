@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe Product, type: :model do
-  subject { build(:random_product) }
+  subject { build(:product) }
   
   describe "validate product" do
     it { is_expected.to be_a Product }
