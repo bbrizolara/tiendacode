@@ -54,29 +54,20 @@ RSpec.describe ProductsController, type: :controller do
   end
 
   describe "PUT #update" do
-    subject { put :update, params: { id: product.id, product: params } }
-
-    let(:new_price) { { price: attributes_prod[:price].to_s } }
-    let(:attributes_prod) { FactoryBot.attributes_for(:product) }
-    let!(:params) do
-      ActionController::Parameters.new(attributes_prod.merge(new_price))
-                                  .permit(:name, :description, :price)
-    end
-    let!(:product) { FactoryBot.create(:product, params.to_h) }
-
+    subject { put :update, params: { id: product.id, product: new_params } }
+    let!(:product) { FactoryBot.create(:product) }
     let(:new_attributes_prod) { FactoryBot.attributes_for(:product) }
-    let(:params) do
+    let(:new_params) do
       ActionController::Parameters.new(new_attributes_prod)
                                          .permit(:name, :description, :price)
     end 
-
     
     it "should update a Product with given params" do      
       subject
       product.reload
-      expect(product.name).to eq(params[:name])
-      expect(product.description).to eq(params[:description])
-      expect(product.price).to eq(params[:price])
+      expect(product.name).to eq(new_params[:name])
+      expect(product.description).to eq(new_params[:description])
+      expect(product.price).to eq(new_params[:price])
       is_expected.to redirect_to(action: :show, id: product.id)
     end
   end
