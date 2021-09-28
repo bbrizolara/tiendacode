@@ -59,6 +59,9 @@ Layout/CommentIndentation:
 Layout/ElseAlignment:
   Enabled: true
 
+Layout/LineLength:
+  Max: 100
+
 # Align `end` with the matching keyword or starting expression except for
 # assignments, where it should be aligned with the LHS.
 Layout/EndAlignment:
