@@ -15,15 +15,18 @@ RSpec.describe 'Products', type: :request do
   end
 
   describe 'GET products#show' do
-    let(:product) { FactoryBot.create(:product) }
+    let!(:product) { FactoryBot.create(:product) }
+    let(:price_string) { product.price.to_s }
+    let(:escaped_html_description) { CGI.escapeHTML(product.description) }
+    let(:escaped_html_name) { CGI.escapeHTML(product.name) }
     subject { response.body }
     before { get product_path(product) }
 
     it { is_expected.to render_template('products/show') }
     it 'shows product attributes' do
-      is_expected.to include(product.name)
-      is_expected.to include(product.price.to_s)
-      is_expected.to include( CGI.escapeHTML( product.description ) )
+      is_expected.to include(escaped_html_name)
+      is_expected.to include(price_string)
+      is_expected.to include(escaped_html_description)
     end
   end
 end
