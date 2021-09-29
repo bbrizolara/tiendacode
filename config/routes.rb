@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root 'users#index'
+  root 'products#index'
 
   resources :products
   resources :users, except: %i[destroy update edit]
+  resources :sessions, only: %i[new create destroy]
 end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  include SessionsHelper
   before_action :user, only: %i[show]
 
   def index
@@ -15,6 +16,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if user.save
+      log_in user
       flash[:notice] = "User was successfully created."
       redirect_to users_path
     else
