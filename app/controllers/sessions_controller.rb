@@ -1,9 +1,7 @@
 class SessionsController < ApplicationController
   include SessionsHelper
 
-  def new
-    @user = User.new
-  end
+  def new; end
 
   def create
     if user && user.authenticate(params.dig(:session, :password))
