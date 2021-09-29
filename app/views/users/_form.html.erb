@@ -2,14 +2,26 @@
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-  <div class="form-inputs">
-    <%= f.input :name %>
-    <%= f.input :email %>
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
-  </div>
-  <br>
-  <div class="form-actions">
-    <%= f.button :submit, 'Sign Up' %>
-  </div>
+  <div class="row d-flex justify-content-center align-items-center h-100">
+    <div class="col-12 col-md-8 col-lg-6 col-xl-8">
+      <div class="form-inputs">
+        <div class="mb-3">
+          <%= f.input :name %>
+        </div>
+        <div class="mb-3">
+          <%= f.input :email %>
+        </div>
+        <div class="mb-3">
+          <%= f.input :password %>
+        </div>
+        <div class="mb-3">
+          <%= f.input :password_confirmation %>
+        </div>
+      </div>
+      <div class="form-actions">
+        <%= f.button :submit, 'Confirm', class: "btn btn-primary" %>
+      </div>
+      <%= link_to 'Back', users_path %>
+    </div>    
+  </div>  
 <% end %> 
