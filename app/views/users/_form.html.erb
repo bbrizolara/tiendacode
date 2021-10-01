@@ -1,15 +1,16 @@
-<%= simple_form_for user do |f| %>
+<%= simple_form_for user, wrapper: :vertical_form do |f| %>
   <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="form-inputs">
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if 
+      f.object.errors[:base].present? %>
     <%= f.input :name %>
     <%= f.input :email %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
+  <div class="form-group mb-2">
+    <div class="col-sm-9 offset-sm-0">
+      <%= f.button :submit, 'Confirm', class: "btn-primary" %>
+      <%= f.button :button, "Cancel", type: "reset", class: "btn-outline-secondary" %>
+    </div>
   </div>
-  <br>
-  <div class="form-actions">
-    <%= f.button :submit, 'Sign Up' %>
-  </div>
-<% end %> 
+  <%= link_to 'Back', users_path %>
+<% end %>

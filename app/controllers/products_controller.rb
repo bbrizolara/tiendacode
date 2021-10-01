@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if product.save
-      flash[:notice] = "Product was successfully created."
+      flash.now[:notice] = "Product was successfully created."
       redirect_to product
     else
       render :new, status: :unprocessable_entity
@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
 
   def update
     if product.update(product_params)
-      flash[:notice] = "Product was successfully updated."
+      flash.now[:notice] = "Product was successfully updated."
       redirect_to product
     else
       render :edit, status: :unprocessable_entity
@@ -37,7 +37,7 @@ class ProductsController < ApplicationController
 
   def destroy
     product.destroy
-    flash[:notice] = "Product was successfully deleted."
+    flash.now[:notice] = "Product was successfully deleted."
     redirect_to action: :index
   end
 

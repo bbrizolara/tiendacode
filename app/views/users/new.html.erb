@@ -1,4 +1,9 @@
-<h1>Sign up</h1>
+<h1 class="text-center mb-3">Sign up</h1>
 
-<%= render 'form', user: @user %>
-<%= link_to 'Back', users_path %>
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-12 col-md-8 col-lg-6 col-xl-8">
+    <div class="form-inputs">
+      <%= render 'form', user: @user %>        
+    </div>
+  </div>    
+</div>  
