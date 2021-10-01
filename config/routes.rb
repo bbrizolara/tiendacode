@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :products
   resources :users, except: %i[destroy update edit]
   resources :sessions, only: %i[new create destroy]
+  resources :unauthorized, only: %i[index]
 end

@@ -15,4 +15,13 @@ module SessionsHelper
     session.delete(:user_id)
     @current_user = nil
   end
+
+  def verify_access
+    return if logged_in? && current_user.is_admin
+    redirect_to '/unauthorized'
+  end
+
+  def admin_logged?
+    return logged_in? && current_user.is_admin
+  end
 end

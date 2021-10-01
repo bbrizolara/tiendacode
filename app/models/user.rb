@@ -14,4 +14,8 @@ class User < ApplicationRecord
   def assign_role
     self.role ||= Role.find_or_create('User')
   end
+
+  def is_admin
+    return self.role.name.eql? 'Admin'
+  end
 end
