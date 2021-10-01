@@ -12,6 +12,6 @@ class User < ApplicationRecord
   
 
   def assign_role
-    self.role = Role.find_or_create('User') unless self.role.present?
+    self.role ||= Role.find_or_create('User')
   end
 end
