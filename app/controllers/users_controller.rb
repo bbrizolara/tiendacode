@@ -8,11 +8,11 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to '/unauthorized' unless current_user.is_admin || current_user.id == user.id
+    redirect_to unauthorized_index_path unless current_user.admin? || current_user.id == user.id
   end
 
   def new
-    redirect_to products_path if logged_in? 
+    redirect_to root_path if logged_in? && !admin_logged?
     @user = User.new
   end
 
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     if user.save
       log_in user
       flash.now[:notice] = "User was successfully created."
-      redirect_to products_path
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end

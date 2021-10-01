@@ -17,11 +17,11 @@ module SessionsHelper
   end
 
   def verify_access
-    return if logged_in? && current_user.is_admin
-    redirect_to '/unauthorized'
+    return if logged_in? && current_user.admin?
+    redirect_to unauthorized_index_path
   end
 
   def admin_logged?
-    return logged_in? && current_user.is_admin
+    return logged_in? && current_user.admin?
   end
 end

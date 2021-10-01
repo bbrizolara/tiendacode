@@ -7,7 +7,7 @@ class SessionsController < ApplicationController
     if user&.authenticate(params.dig(:session, :password))
       log_in user
       flash.now[:notice] = "Logged in successfully"
-      redirect_to products_path
+      redirect_to root_path
     else
       flash.now[:alert] = "Invalid credentials"
       render :new

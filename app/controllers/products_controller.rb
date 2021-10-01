@@ -2,7 +2,7 @@
 
 class ProductsController < ApplicationController
   include SessionsHelper
-  before_action :product, only: %i[ show edit ]
+  before_action :product, only: %i[show edit]
   before_action :verify_access, except: %i[show index]
 
   def index
