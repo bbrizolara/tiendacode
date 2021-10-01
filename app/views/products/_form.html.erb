@@ -1,33 +1,22 @@
-<%= simple_form_for product do |f| %>
+<%= simple_form_for product, wrapper: :vertical_form do |f| %>
   <%= f.error_notification %>
-  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
-
-  <div class="row d-flex justify-content-center align-items-center h-100">
-    <div class="col-12 col-md-8 col-lg-6 col-xl-8">
-      <div class="form-inputs">
-        <div class="mb-3">
-          <%= f.input :name %>
-        </div>
-        <div class="mb-3">
-          <%= f.input :description %>
-        </div>
-        <div class="mb-3">
-          <%= f.input :price %>
-        </div>
-        <div class="mb-3">
-          <%= f.input :image, class: "form-control", type: "file" %>
-          <% if product.image.attached? %>
-            <p>
-              <%= image_tag product.image %>
-            </p>
-          <% end %>
-        </div>
-      </div>
-      <br>
-      <div class="form-actions">
-        <%= f.button :submit, class: "btn btn-primary" %>
-      </div>
-      <%= link_to 'Back', products_path, class: "btn btn-link" %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if 
+      f.object.errors[:base].present? %>  
+    <%= f.input :name %>  
+    <%= f.input :description %>
+    <%= f.input :price %>
+    <%= f.input :image, class: "form-control", type: "file" %>
+    <% if product.image.attached? %>
+      <p>
+        <%= image_tag product.image %>
+      </p>
+    <% end %>    
+  <br>
+  <div class="form-group mb-2">
+    <div class="col-sm-9 offset-sm-0">
+      <%= f.button :submit, 'Confirm', class: "btn-primary" %>
+      <%= f.button :button, "Cancel", type: "reset", class: "btn-outline-secondary" %>
     </div>
   </div>
+  <%= link_to 'Back', products_path, class: "btn btn-link" %>
 <% end %>
