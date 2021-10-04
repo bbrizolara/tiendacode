@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    redirect_to unauthorized_index_path unless current_user.admin? || current_user.id == user.id
+    redirect_to error_path(403) unless current_user.admin? || current_user.id == user.id    
   end
 
   def new

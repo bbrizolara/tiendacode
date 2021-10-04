@@ -18,7 +18,7 @@ module SessionsHelper
 
   def verify_access
     return if logged_in? && current_user.admin?
-    redirect_to unauthorized_index_path
+    redirect_to error_path(403), flash: { error: 'Unauthorized action' }
   end
 
   def admin_logged?
