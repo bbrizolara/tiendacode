@@ -1,18 +1,15 @@
 class UsersController < ApplicationController
-  include SessionsHelper
-  before_action :user, only: %i[show]
+  before_action :verifiy_user_show, :user, only: %i[show]
   before_action :verify_access, only: %i[index]
+  before_action :verify_user_new, only: %i[new]
 
   def index
     @users = User.order(created_at: :desc)
   end
 
-  def show
-    redirect_to error_path(403) unless current_user.admin? || current_user.id == user.id    
-  end
+  def show; end
 
   def new
-    redirect_to root_path if logged_in? && !admin_logged?
     @user = User.new
   end
 

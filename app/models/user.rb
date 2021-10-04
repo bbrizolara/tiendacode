@@ -16,6 +16,6 @@ class User < ApplicationRecord
   end
 
   def admin?
-    return self.role.name.eql? 'Admin'
+    return role.name.eql? 'Admin'
   end
 end
