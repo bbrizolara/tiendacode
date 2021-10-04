@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
-  include SessionsHelper
-  before_action :user, only: %i[show]
+  before_action :verifiy_user_show, :user, only: %i[show]
+  before_action :verify_access, only: %i[index]
+  before_action :verify_user_new, only: %i[new]
 
   def index
     @users = User.order(created_at: :desc)
@@ -18,7 +19,7 @@ class UsersController < ApplicationController
     if user.save
       log_in user
       flash.now[:notice] = "User was successfully created."
-      redirect_to users_path
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity
     end

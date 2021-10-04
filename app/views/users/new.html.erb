@@ -1,4 +1,8 @@
-<h1 class="text-center mb-3">Sign up</h1>
+<% if admin_logged? %>
+  <h1 class="text-center mb-3">Create User</h1>
+<% else %>
+  <h1 class="text-center mb-3">Sign up</h1>
+<% end %>
 
 <div class="row d-flex justify-content-center align-items-center h-100">
   <div class="col-12 col-md-8 col-lg-6 col-xl-8">

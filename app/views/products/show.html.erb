@@ -12,7 +12,9 @@
 
 <br>
 <ul>
-    <li><%= link_to 'Edit', edit_product_path(@product) %></li>
-    <li><%= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+    <% if admin_logged? %>
+      <li><%= link_to 'Edit', edit_product_path(@product) %></li>
+      <li><%= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+    <% end %>
     <li><%= link_to 'View Products', products_path %></li>
 </ul>

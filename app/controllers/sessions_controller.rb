@@ -1,13 +1,11 @@
 class SessionsController < ApplicationController
-  include SessionsHelper
-
   def new; end
 
   def create
     if user&.authenticate(params.dig(:session, :password))
       log_in user
       flash.now[:notice] = "Logged in successfully"
-      redirect_to user
+      redirect_to root_path
     else
       flash.now[:alert] = "Invalid credentials"
       render :new
