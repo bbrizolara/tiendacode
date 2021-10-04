@@ -18,7 +18,7 @@ class ErrorsController < ApplicationController
   private
 
   def status_code
-    @status_code = params.dig(:id)|| 500
+    @status_code = params.dig(:id) || 500
   end
 
   def error_params
