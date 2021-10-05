@@ -1,0 +1,19 @@
+<%= simple_form_for [product, product.questions.build], wrapper: :vertical_form do |f| %>
+    <% if logged_in? %> 
+      <%= f.hidden_field :user_email, :value => current_user.email %>
+      <%= f.hidden_field :user_name, :value => current_user.name %>
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+    <% else %> 
+      <%= f.input :user_email %>  
+      <%= f.input :user_name %>
+      <%= f.hidden_field :user, :value => nil %>
+    <% end %> 
+    <%= f.input :question, input_html: { rows: 3 } %>  
+  <br>
+  <div class="form-group mb-2">
+    <div class="col-sm-9 offset-sm-0">
+      <%= f.button :submit, 'Send', class: "btn-primary" %>
+      <%= f.button :button, "Cancel", type: "reset", class: "btn-outline-secondary" %>
+    </div>
+  </div>
+<% end %>

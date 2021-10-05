@@ -10,7 +10,7 @@ FactoryBot.define do
 
     after :build do |product|
       product.image.attach({
-        io: URI.open(Faker::LoremFlickr.image(size: "250x250")),
+        io: URI.open(Faker::LoremFlickr.image(size: "500x300")),
         filename: "#{Time.now.to_i}-random-image.jpeg"
       })
     end

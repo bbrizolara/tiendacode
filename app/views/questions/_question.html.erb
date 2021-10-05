@@ -1,0 +1,11 @@
+
+  <div class="card mb-3">
+    <div class="card-header">
+      <%= question.created_at.strftime("%B %d, %Y") %>
+    </div>
+    <div class="card-body">
+      <h5 class="card-title"><%= question.user_name %> - <%= question.user_email %></h5>
+      <p class="card-text"><%= question.question %></p>
+      <a href="#" class="btn btn-success">Answer</a>
+    </div>
+  </div>
