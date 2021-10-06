@@ -4,11 +4,11 @@ class QuestionsController < ApplicationController
   def create    
     @question = product.questions.create(question_params)
     if @question.errors.full_messages.to_sentence.present?
-      flash[:alert] = @question.errors.full_messages.to_sentence
+      flash.now[:alert] = @question.errors.full_messages[0]
     else
-      flash[:notice] = 'Question added successfully'
-    end
-    
+      @question = nil
+      flash.now[:notice] = 'Question added successfully'
+    end    
     render 'products/show'
   end
 

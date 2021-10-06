@@ -46,11 +46,11 @@ class ProductsController < ApplicationController
   private
   
     def product
-      @product ||= Product.find(params[:id])
+      @product ||= Product.find(params.dig(:id))
     end
 
     def product_with_questions
-      @product ||= Product.includes(questions: :user).find(params[:id])
+      @product ||= Product.includes(questions: :user).find(params.dig(:id))
     end
 
     def product_params

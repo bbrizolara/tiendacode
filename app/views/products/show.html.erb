@@ -13,7 +13,7 @@
           <div class="card-body">
             <h3 class="card-title"><%= @product.name %></h3>
             <p class="card-text">T<%= @product.description %></p>
-            <h5 class="card-text"><small class="text-muted"><%= @product.price.to_s %></small></h5>
+            <h4 class="card-text"><small class="text-muted">$<%= @product.price %></small></h4>
           </div>
         </div>
       </div>
@@ -35,7 +35,7 @@
     <br>
     <h3 class="text-center mt-3 mb-3">Ask a question</h3>
     <%= render 'shared/flash' %>
-    <%= render 'questions/form', product: @product %>
+    <%= render 'questions/form', product: @product, question: @question %>
 
   </div>
 </div>
