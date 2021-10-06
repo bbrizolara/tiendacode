@@ -1,5 +1,3 @@
-# Note: You must restart bin/webpack-dev-server for changes to take effect
-
 default: &default
   source_path: app/javascript
   source_entry_path: packs
@@ -82,10 +80,10 @@ production:
   <<: *default
 
   # Production depends on precompilation of packs prior to booting for performance.
-  compile: true
+  compile: false
 
   # Extract and emit a css file
-  extract_css: true
+  extract_css: false
 
   # Cache manifest.json for performance
   cache_manifest: true
