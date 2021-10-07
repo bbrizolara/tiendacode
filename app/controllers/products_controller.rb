@@ -1,14 +1,16 @@
 # frozen_string_literal: true
 
 class ProductsController < ApplicationController
-  before_action :product, only: %i[show edit]
+  before_action :product, only: %i[edit]
   before_action :verify_access, except: %i[show index]
 
   def index
     @products = Product.order(created_at: :desc)
   end
 
-  def show; end
+  def show
+    @product ||= Product.includes(questions: :user).find(params.dig(:id))
+  end
 
   def new
     @product = Product.new
@@ -45,7 +47,7 @@ class ProductsController < ApplicationController
   private
   
     def product
-      @product ||= Product.find(params[:id])
+      @product ||= Product.find(params.dig(:id))
     end
 
     def product_params

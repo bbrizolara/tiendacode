@@ -1,20 +1,41 @@
-<h1>Product <%= @product.id %> </h1>
-
-<h3>  Name: <%= @product.name %> </h3>
-<h3>  Description: <%= @product.description %> </h3>
-<h3>  Price: <%= @product.price %> </h3>
-<h3>  Image:  </h3>
-<% if @product.image.attached? %>
- <p>
-  <%= image_tag @product.image %>
- </p>
-<% end %>
-
+<h1 class="text-center mb-3">Product <%= @product.id %></h1>
 <br>
-<ul>
+<div class="row d-flex justify-content-center align-items-center h-100">
+  <div class="col-12 col-md-8 col-lg-6 col-xl-8">    
+    <div class="card mb-3"">
+      <div class="row g-0">
+        <div class="col-md-4">
+          <% if @product.image.attached? %>
+            <%= image_tag @product.image, class: 'img-fluid rounded-start' %>
+        <% end %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <h3 class="card-title"><%= @product.name %></h3>
+            <p class="card-text">T<%= @product.description %></p>
+            <h4 class="card-text"><small class="text-muted">$<%= @product.price %></small></h4>
+          </div>
+        </div>
+      </div>
+    </div>
     <% if admin_logged? %>
-      <li><%= link_to 'Edit', edit_product_path(@product) %></li>
-      <li><%= link_to 'Delete', product_path(@product), method: :delete, data: { confirm: 'Are you sure?' } %></li>
+      <%= link_to 'Edit', edit_product_path(@product), class: "btn btn-primary" %>
+      <%= link_to 'Delete', product_path(@product), class: "btn btn-danger", method: :delete, data: { confirm: 'Are you sure?' } %>
     <% end %>
-    <li><%= link_to 'View Products', products_path %></li>
-</ul>
+    <%= link_to 'Back', products_path, class: "btn btn-link mb-3" %>
+
+    <br>
+    <h3 class="text-center mt-1 mb-3">Questions</h3>
+    <% if @product.questions.present? %>
+      <%= render @product.questions.ordered_by_date, product: @product %>
+    <% else %>
+      <%= render 'questions/no_questions_yet' %>
+    <% end %>
+
+    <br>
+    <h3 class="text-center mt-3 mb-3">Ask a question</h3>
+    <%= render 'shared/flash' %>
+    <%= render 'questions/form', product: @product, question: @question %>
+
+  </div>
+</div>

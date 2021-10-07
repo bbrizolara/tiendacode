@@ -26,6 +26,17 @@ end
   end
 end
 
+10.times do 
+  Question.create do |question|
+    user = User.all.sample
+    question.user_email = user.email
+    question.user_name = user.name
+    question.user = user
+    question.product = Product.all.sample
+    question.question = Faker::Lorem.paragraph
+  end
+end
+
 10.times do
   User.create do |user|
     user.email = Faker::Internet.email
@@ -34,5 +45,15 @@ end
     user.password_confirmation = 'password'
     user.active = true
     user.role = roles.second
+  end
+end
+
+10.times do 
+  Question.create do |question|
+    user = User.all.sample
+    question.user_email = user.email
+    question.user_name = user.name
+    question.product = Product.all.sample
+    question.question = Faker::Lorem.paragraph
   end
 end

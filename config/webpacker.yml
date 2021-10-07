@@ -1,3 +1,5 @@
+# Note: You must restart bin/webpack-dev-server for changes to take effect
+
 default: &default
   source_path: app/javascript
   source_entry_path: packs
@@ -65,9 +67,10 @@ development:
     quiet: false
     pretty: false
     headers:
-      "Access-Control-Allow-Origin": "*"
+      'Access-Control-Allow-Origin': '*'
     watch_options:
-      ignored: "**/node_modules/**"
+      ignored: '**/node_modules/**'
+
 
 test:
   <<: *default
@@ -83,7 +86,7 @@ production:
   compile: false
 
   # Extract and emit a css file
-  extract_css: false
+  extract_css: true
 
   # Cache manifest.json for performance
   cache_manifest: true
