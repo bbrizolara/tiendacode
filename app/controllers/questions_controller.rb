@@ -3,9 +3,7 @@ class QuestionsController < ApplicationController
 
   def create    
     @question = product.questions.create(handle_params)
-    if @question.errors.full_messages.to_sentence.present?
-      flash.now[:alert] = @question.errors.full_messages[0]
-    else
+    if @question.persisted?
       @question = nil
       flash.now[:notice] = 'Question added successfully'
     end    
@@ -19,7 +17,7 @@ class QuestionsController < ApplicationController
     end
 
     def question_params
-      params.require(:question).permit(:user_email, :user_name, :question)
+      params.require(:question).permit(:user_email, :user_name, :question, :user_id)
     end
 
     def handle_params
@@ -27,7 +25,7 @@ class QuestionsController < ApplicationController
         logged_in_params = { user_email: current_user.email,
                              user_name: current_user.name, 
                              user_id: current_user.id }
-        params.merge(logged_in_params)
+        question_params.merge(logged_in_params)
       else
         question_params
       end
