@@ -1,11 +1,6 @@
-<% if logged_in? %> 
-  <%= f.hidden_field :user_email, :value => current_user.email %>
-  <%= f.hidden_field :user_name, :value => current_user.name %>
-  <%= f.hidden_field :user_id, :value => current_user.id %>
-<% else %> 
+<% unless logged_in? %> 
   <%= f.input :user_email, label: 'Email' %>  
   <%= f.input :user_name, label: 'Name' %>
-  <%= f.hidden_field :user, :value => nil %>
 <% end %> 
 <%= f.input :question, label: 'Question', input_html: { rows: 3 } %>  
 <br>
