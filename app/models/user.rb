@@ -10,12 +10,16 @@ class User < ApplicationRecord
   
   has_secure_password
   
-
   def assign_role
     self.role ||= Role.find_or_create('User')
   end
 
   def admin?
     return role.name.eql? 'Admin'
+  end
+
+  def activate
+    update_attribute(:active, true)
+    update_attribute(:activated_at, Time.current)
   end
 end
