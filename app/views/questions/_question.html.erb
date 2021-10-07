@@ -1,11 +1,12 @@
-
+<% present(question) do |q| %>
   <div class="card mb-3">
     <div class="card-header">
-      <%= question.created_at.strftime("%B %d, %Y") %>
+      <%= q.createdat_to_text %>
     </div>
     <div class="card-body">
-      <h5 class="card-title"><%= question.user_name %> - <%= question.user_email %></h5>
-      <p class="card-text"><%= question.question %></p>
+      <h5 class="card-title"><%= q.user_info %></h5>
+      <p class="card-text"><%= q.question %></p>
       <a href="" class="btn btn-success">Answer</a>
     </div>
   </div>
+<% end %>
