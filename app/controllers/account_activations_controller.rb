@@ -3,7 +3,7 @@ class AccountActivationsController < ApplicationController
 
   def edit
     account_activated = false
-    if !user.active? && authenticated?(params.dig(:id))      
+    if user && !user.active? && authenticated?(params.dig(:id))      
       user.activate
       log_in user
       account_activated = true      
@@ -20,10 +20,11 @@ class AccountActivationsController < ApplicationController
   def handle_redirect(account_activated)
     if account_activated
       flash[:notice] = "Account activated successfully"
+      redirect_to root_path
     else
       flash[:alert] = "Invalid activation link"
+      redirect_to new_session_path
     end    
-    redirect_to root_path
   end
 
   def authenticated?(token)

@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :verify_user_new, only: %i[new]
 
   def index
-    @users = User.where(active: true).order(created_at: :desc)
+    @users = User.active_users
   end
 
   def show; end
@@ -15,7 +15,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    activation_token = new_token()
+    activation_token = new_token
     create_activation_digest(activation_token)
     if user.save
       send_activation_email(activation_token)

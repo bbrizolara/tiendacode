@@ -9,6 +9,8 @@ class User < ApplicationRecord
                     uniqueness: true  
   has_secure_password
   
+  scope :active_users, -> { where(active: true).order(created_at: :desc) }
+
   def assign_role
     self.role ||= Role.find_or_create('User')
   end
