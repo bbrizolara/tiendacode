@@ -1,0 +1,10 @@
+<% if question.present? %>
+  <%= simple_form_for question, url: product_questions_path(product), wrapper: :vertical_form do |f| %>
+    <%= f.error_notification %>
+    <%= render 'questions/form_fields', f: f %>
+  <% end %>
+<% else %>
+  <%= simple_form_for [product, product.questions.build], wrapper: :vertical_form do |f| %>
+    <%= render 'questions/form_fields', f: f %>
+  <% end %>
+<% end%>
