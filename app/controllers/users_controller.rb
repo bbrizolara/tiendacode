@@ -1,5 +1,4 @@
 class UsersController < ApplicationController
-  include UserHelper  
   before_action :verifiy_user_show, :user, only: %i[show]
   before_action :verify_access, only: %i[index]
   before_action :verify_user_new, only: %i[new]
@@ -37,8 +36,8 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
 
-    def create_activation_digest(activation_token)      
-      user.activation_digest = digest(activation_token)
+    def create_activation_digest(activation_token)     
+      user.activation_digest = AccountActivation::DigestService.call(activation_token)
     end
 
     def new_token
