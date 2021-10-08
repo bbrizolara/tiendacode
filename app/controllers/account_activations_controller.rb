@@ -3,7 +3,7 @@ class AccountActivationsController < ApplicationController
 
   def edit
     account_activated = false
-    if !user.active? && authenticated?(:activation, params.dig(:id))      
+    if !user.active? && authenticated?(params.dig(:id))      
       user.activate
       log_in user
       account_activated = true      
@@ -26,8 +26,8 @@ class AccountActivationsController < ApplicationController
     redirect_to root_path
   end
 
-  def authenticated?(attribute, token)
-    digest = user.public_send("#{attribute}_digest")
+  def authenticated?(token)
+    digest = user.activation_digest
     return false if digest.nil?
 
     BCrypt::Password.new(digest).is_password?(token)
