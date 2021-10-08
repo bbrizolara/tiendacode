@@ -3,7 +3,7 @@ users = User.create(name: 'Admin', email: 'bbrizolara@cds.com', password: 'passw
                     password_confirmation: 'password', active: true, role: roles.first,
                     activated_at: Time.current)
 
-                    require "open-uri"
+require "open-uri"
 20.times do
   Product.create do |product|
     product.name = Faker::Name.name

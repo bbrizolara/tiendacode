@@ -1,6 +1,5 @@
 class AccountActivationsController < ApplicationController
-  include UserHelper
-  
+  include UserHelper  
   before_action :user, only: %i[edit]
 
   def edit

@@ -6,8 +6,7 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true,
                     format: { with: Devise.email_regexp, message: 'Must be a valid email' },
-                    uniqueness: true
-  
+                    uniqueness: true  
   has_secure_password
   
   def assign_role

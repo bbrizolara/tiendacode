@@ -1,5 +1,4 @@
 class UserMailer < ApplicationMailer
-
   def account_confirmation(user, activation_token)
     @user = user
     @activation_token = activation_token

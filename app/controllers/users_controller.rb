@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
-  include UserHelper
-  
+  include UserHelper  
   before_action :verifiy_user_show, :user, only: %i[show]
   before_action :verify_access, only: %i[index]
   before_action :verify_user_new, only: %i[new]
