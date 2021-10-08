@@ -37,7 +37,7 @@ class UsersController < ApplicationController
     end
 
     def create_activation_digest(activation_token)     
-      user.activation_digest = AccountActivation::DigestService.call(activation_token)
+      user.activation_digest = Activation::DigestService.call(activation_token)
     end
 
     def new_token

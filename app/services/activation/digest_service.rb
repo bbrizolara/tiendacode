@@ -1,4 +1,4 @@
-module AccountActivation
+module Activation
   module DigestService
     class << self
       def call(string)
