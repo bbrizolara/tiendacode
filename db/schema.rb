@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_05_162246) do
+ActiveRecord::Schema.define(version: 2021_10_14_155106) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,16 @@ ActiveRecord::Schema.define(version: 2021_10_05_162246) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "favorite_products", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_favorite_products_on_product_id"
+    t.index ["user_id", "product_id"], name: "index_favorite_products_on_user_id_and_product_id", unique: true
+    t.index ["user_id"], name: "index_favorite_products_on_user_id"
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.decimal "price"
@@ -55,10 +65,10 @@ ActiveRecord::Schema.define(version: 2021_10_05_162246) do
     t.string "user_email", null: false
     t.string "user_name", null: false
     t.string "question", null: false
-    t.integer "product_id", null: false
+    t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["product_id"], name: "index_questions_on_product_id"
     t.index ["user_email"], name: "index_questions_on_user_email"
     t.index ["user_id"], name: "index_questions_on_user_id"
@@ -85,6 +95,8 @@ ActiveRecord::Schema.define(version: 2021_10_05_162246) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "favorite_products", "products"
+  add_foreign_key "favorite_products", "users"
   add_foreign_key "questions", "products"
   add_foreign_key "questions", "users"
   add_foreign_key "users", "roles"

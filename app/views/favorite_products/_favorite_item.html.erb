@@ -1,0 +1,25 @@
+<div class="list-group list-group-flush border-bottom scrollarea mb-1">
+  <div class="list-group-item list-group-item-action py-3 lh-tight" aria-current="true">
+    <div class="d-flex w-100 align-items-center justify-content-between">
+      <strong><%= product.name %></strong>
+      <div style="width: 50px;">
+        <%= render 'favorite_products/remove_favorite', product: product %>
+      </div>
+    </div>
+    <div class="col-10 mb-1 small">$<%= product.price %></div>
+    <div hidden>
+    <div class="d-flex w-100 align-items-center justify-content-between">
+      <% if product.description.length > 20 %>
+        <strong><%= product.description[0...20] %>...</strong>
+      <% else %>
+        <strong><%= product.description[0...20] %></strong>
+      <% end %>
+      <div style="width: 60px;">
+        <% if product.image.attached? %>
+          <%= image_tag product.image, class: 'img-fluid rounded-start' %>
+        <% end %>
+      </div>
+    </div>
+    </div>
+  </div>
+</div>

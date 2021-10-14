@@ -1,0 +1,22 @@
+<div data-favorite-products-target="favorite">
+  <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
+    <p class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+      <span class="fs-5 fw-semibold">Favorite products</span>
+    </p>
+    <% if logged_in? %>
+      <% if user_has_favorites %>
+        <% current_user.products.each do |product| %>        
+          <%= render 'favorite_products/favorite_item', product: product %>        
+        <% end %>
+      <% else %>
+        <div class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">You dont have favorites!</strong>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="d-flex w-100 align-items-center justify-content-between">
+        <strong class="mb-1">Log in to see your favorites!</strong>
+      </div>
+    <% end %>
+  </div>
+</div>
