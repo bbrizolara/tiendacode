@@ -27,8 +27,4 @@ export default class extends Controller {
       this.loadChanges= true;
     }
   };
-
-  error(){
-    console.log('Ajax Error');
-  };
 }

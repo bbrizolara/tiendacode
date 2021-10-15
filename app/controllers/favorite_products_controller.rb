@@ -1,11 +1,11 @@
 class FavoriteProductsController < ApplicationController
   include FavoriteProductsHelper
-  before_action :product, :user, only: %i[create]
+  before_action :product, only: %i[create]
   before_action :favorite_product, only: %i[destroy]
 
   def create
     unless get_favorite_product(product)
-      @favorite_product = FavoriteProduct.create(user: user, product: product)
+      @favorite_product = FavoriteProduct.create(user: current_user, product: product)
     end
     render partial: 'favorite_products/favorites_table', locals: { product: product }, layout: false 
   end
@@ -21,10 +21,6 @@ class FavoriteProductsController < ApplicationController
   
     def product
       @product ||= Product.find(params.dig(:product_id))
-    end
-
-    def user
-      @user ||= current_user
     end
 
     def favorite_product
