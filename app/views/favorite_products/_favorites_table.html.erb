@@ -5,8 +5,8 @@
     </p>
     <% if logged_in? %>
       <% if user_has_favorites %>
-        <% current_user.products.each do |product| %>        
-          <%= render 'favorite_products/favorite_item', product: product %>        
+        <% current_user.products.each.with_index do |product, index| %>        
+          <%= render 'favorite_products/favorite_item', product: product, index: index %>        
         <% end %>
       <% else %>
         <div class="d-flex w-100 align-items-center justify-content-between">
