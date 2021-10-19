@@ -7,10 +7,10 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true,
                     format: { with: Devise.email_regexp, message: 'Must be a valid email' },
-                    uniqueness: true
-  
+                    uniqueness: true  
   has_secure_password
   
+  scope :active_users, -> { where(active: true).order(created_at: :desc) }
 
   def assign_role
     self.role ||= Role.find_or_create('User')
@@ -18,5 +18,10 @@ class User < ApplicationRecord
 
   def admin?
     return role.name.eql? 'Admin'
+  end
+
+  def activate
+    update_attribute(:active, true)
+    update_attribute(:activated_at, Time.current)
   end
 end

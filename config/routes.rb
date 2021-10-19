@@ -8,6 +8,9 @@ Rails.application.routes.draw do
   end
   resources :users, except: %i[destroy update edit]
   resources :sessions, only: %i[new create destroy]
+  namespace :activation do
+    resources :accounts, only: %i[edit]
+  end  
   resources :errors, only: %i[show]
   get "/404", to: "errors#not_found"
   get "/500", to: "errors#internal_error"

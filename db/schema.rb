@@ -79,6 +79,8 @@ ActiveRecord::Schema.define(version: 2021_10_06_204512) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "role_id", null: false
+    t.string "activation_digest"
+    t.datetime "activated_at"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["role_id"], name: "index_users_on_role_id"
   end

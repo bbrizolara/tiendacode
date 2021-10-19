@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   before_action :verify_user_new, only: %i[new]
 
   def index
-    @users = User.order(created_at: :desc)
+    @users = User.active_users
   end
 
   def show; end
@@ -15,23 +15,36 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
+    activation_token = new_token
+    create_activation_digest(activation_token)
     if user.save
-      log_in user
-      flash.now[:notice] = "User was successfully created."
-      redirect_to root_path
+      send_activation_email(activation_token)
+      flash.now[:notice] = "Check your email to activate your account"
+      redirect_to new_session_path
     else
       render :new, status: :unprocessable_entity
     end
   end
 
   private
-  
+
     def user
       @user ||= User.find(params[:id])
     end
 
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
+    end
+
+    def create_activation_digest(activation_token)     
+      user.activation_digest = Activation::DigestService.call(activation_token)
+    end
+
+    def new_token
+      SecureRandom.urlsafe_base64
+    end
+
+    def send_activation_email(activation_token)
+      UserMailer.account_confirmation(user, activation_token).deliver_later
     end
 end
