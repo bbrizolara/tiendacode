@@ -20,10 +20,10 @@ module Activation
 
     def handle_redirect(account_activated)
       if account_activated
-        flash[:notice] = "Account activated successfully"
+        flash.now[:notice] = "Account activated successfully"
         redirect_to root_path
       else
-        flash[:alert] = "Invalid activation link"
+        flash.now[:alert] = "Invalid activation link"
         redirect_to new_session_path
       end    
     end
