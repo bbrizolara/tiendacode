@@ -1,9 +1,9 @@
 class FavoriteProductsController < ApplicationController
-  before_action :product, :validate_uniqueness, only: %i[create]
+  before_action :product, only: %i[create]
   before_action :favorite_product, only: %i[destroy]
 
   def create    
-    @favorite_product = FavoriteProduct.create(user: current_user, product: product)
+    @favorite_product = FavoriteProduct.find_or_create_by(user: current_user, product: product)
     render_table
   end
 
@@ -25,12 +25,6 @@ class FavoriteProductsController < ApplicationController
 
   def favorite_product_params
     params.require(:favorite_product).permit(:id, :product_id)
-  end
-
-  def validate_uniqueness
-    if FavoriteProduct.find_by(user: current_user, product: product)
-      render_table
-    end
   end
 
   def render_table

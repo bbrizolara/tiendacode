@@ -1,5 +1,5 @@
 <%= link_to user_favorite_product_path(current_user, favorite_product), 
     method: :delete, remote: true, 
     data: { action: 'ajax:success->favorite-products#add_remove' } do %>
-      <i class="fa fa-heart-o heart-icon-red"></i>
+      <i class="fa fa-heart-o favorite-heart"></i>
 <% end %>

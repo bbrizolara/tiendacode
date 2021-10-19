@@ -4,7 +4,7 @@
           data-favorite-products-index-param="<%= index %>">
       <div class="d-flex w-100 align-items-center justify-content-between">
         <strong><%= favorite_product.product.name %></strong>
-        <div class="div-width-50">
+        <div class="favorite-container-50">
           <%= render 'favorite_products/remove_favorite', favorite_product: favorite_product %>
         </div>
       </div>
@@ -15,7 +15,7 @@
         <% present(favorite_product.product) do |p|%>
           <strong><%= p.product_description %></strong>
         <% end %>
-        <div class="div-width-60">
+        <div class="favorite-container">
           <% if favorite_product.product.image.attached? %>
             <%= image_tag favorite_product.product.image, class: 'img-fluid rounded-start' %>
           <% end %>
