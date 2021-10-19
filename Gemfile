@@ -26,6 +26,9 @@ gem 'devise'
 
 gem 'simple_form'
 gem 'bootstrap'
+gem 'hotwire-rails'
+gem 'stimulus-rails'
+gem "font-awesome-rails"
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

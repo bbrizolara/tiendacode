@@ -1,36 +1,10 @@
-<h1 class="text-center mb-3">Products</h1>
-<div class="container mt-5">
-  <% if admin_logged? %>
-    <%= link_to "New product", new_product_path, class: "btn btn-primary" %>
-  <% end %>
-  <div class="table-responsive">
-    <table class= "table table-striped table-bordered table-hover">
-      <thead>
-        <tr class="bg-dark text-white">
-          <th>Name</th>
-          <th>Price</th>          
-          <% if admin_logged? %>
-            <th colspan="3"></th>
-          <% else %>
-            <th colspan="1"></th>
-          <% end %>
-        </tr>
-      </thead>
-
-      <tbody>
-        <% @products.each do |product| %>
-          <tr>
-            <td><%= product.name %></td>
-            <td><%= product.price %></td>
-            <td><%= link_to "Show", product %></td>
-            <% if admin_logged? %>
-              <td><%= link_to "Edit", edit_product_path(product) %></td>
-              <td><%= link_to "Destroy", product, method: :delete, data: { confirm: "Are you sure?" } %></td>
-            <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+<div class="container mt-5" data-controller="favorite-products">
+  <div class="row">
+    <div class="col-9">       
+      <%= render 'products/products_table', products: @products %>
+    </div>
+    <div class="col-3">
+      <%= render 'favorite_products/favorites_table' %>
+    </div>
+  </div>  
 </div>
-<br>

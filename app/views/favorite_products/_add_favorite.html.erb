@@ -1,0 +1,7 @@
+<td>
+  <%= link_to user_favorite_products_path(user_id: current_user.id, product_id: product.id), 
+      method: :post, remote: true, 
+      data: { action: 'ajax:success->favorite-products#add_remove' } do %>
+        <i class="fa fa-heart heart-icon-red"></i>
+  <% end %>
+</td>

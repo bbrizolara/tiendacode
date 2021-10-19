@@ -4,6 +4,8 @@ class User < ApplicationRecord
 
   belongs_to :role
   has_many :questions
+  has_many :favorite_products
+  has_many :products, through: :favorite_products
   validates :name, presence: true
   validates :email, presence: true,
                     format: { with: Devise.email_regexp, message: 'Must be a valid email' },
