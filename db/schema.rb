@@ -55,10 +55,10 @@ ActiveRecord::Schema.define(version: 2021_10_06_204512) do
     t.string "user_email", null: false
     t.string "user_name", null: false
     t.string "question", null: false
-    t.integer "product_id", null: false
+    t.bigint "product_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["product_id"], name: "index_questions_on_product_id"
     t.index ["user_email"], name: "index_questions_on_user_email"
     t.index ["user_id"], name: "index_questions_on_user_id"
